@@ -1,0 +1,33 @@
+name: Deploy to Hostinger via FTP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up FTP environment variables
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+        run: echo "FTP environment variables are set"
+
+      - name: Install FTP client
+        run: sudo apt-get install -y lftp
+
+      - name: Deploy code via FTP
+        run: |
+          lftp -c "
+          set ftp:ssl-allow no
+          open -u $FTP_USERNAME,$FTP_PASSWORD ftp://$FTP_HOST:$FTP_PORT
+          mirror -R -e $GITHUB_WORKSPACE /public_html
+          quit"

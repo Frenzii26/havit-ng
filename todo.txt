@@ -1,0 +1,72 @@
+   <div class="card">
+                     
+                        <form method="post" id="addressSelect" action="/checkout/addresses/" class="card-body">
+                            <div class="p-4">
+                                <fieldset name="addressId" class="form-group">
+                                    <?php
+                                    $userId = $_SESSION['id'];
+
+                                    $sqlq = "SELECT * FROM user_address WHERE userid = '" . $userId . "'";
+                                    $query  = mysqli_query($connectDB, $sqlq);
+                                    // Loop through the fetched results and generate the HTML content
+                                    while ($row = mysqli_fetch_assoc($query)) {
+                                        $addressId = $row['_id'];
+                                        $fullName = $user['full_name'];
+                                        $address = $row['user_address'];
+                                        $country = $row['country'];
+                                        $state = $row['state'];
+                                        $city = $row['city'];
+                                        $zip_code = $row['zip_code'];
+                                        $phoneNumber = $user['phone'];
+                                        $email = $user['email'];
+
+                                        // Generate the HTML content for each address
+                                        echo '<div class="card d-flex justify-content-between p-4 mb-2">';
+                                        echo '<input value="' . $addressId . '" id="fi-addressId-' . $addressId . '" name="addressId" required="" type="radio" class="form-check-input mt-2">';
+                                        echo '<label class="form-check-label" for="fi-addressId-' . $addressId . '" style="font-size: .875rem;padding-left: 32px;min-height: 24px;position: relative;align-items: center;display: inline-flex;">';
+                                        echo '<span class="d-flex flex-column fs-12">';
+                                        echo '<span class="fw-500 fs-14">' . $fullName . '</span>';
+                                        echo '<span class="pt-1">' . $address . '</span>';
+                                        echo '<span class="pt-1">' . $phoneNumber . '</span>';
+                                        echo '</span>';
+                                        echo '</label>';
+                                        echo '<a href="/checkout/addresses/edit/' . $addressId . '" class="btn btn-default btn-sm -i-start -mla -me-base">Edit';
+                                        echo '<svg viewBox="0 0 24 24" class="ic -f-or5 -mlxs" width="14" height="14">';
+                                        echo '<use xlink:href="https://www.jumia.com.ng/assets_he/images/i-icons.5fc0e713.svg#edit"></use>';
+                                        echo '</svg>';
+                                        echo '</a>';
+                                        echo '</div>';
+                                    }
+                                    ?>
+
+                                    <div class="card-b -df -pam -mbs">
+                                        <input value="11816460" id="fi-addressId-0" name="addressId" checked="" required="" type="radio" class="form-check-input rad">
+                                        <label class="form-check-label lbl" for="fi-addressId-0">
+                                            <span class="-df -d-co -fs12 -gy5">
+                                                <span class="-gy7 -m -fs14">Ifeanyichukwu John</span>
+                                                <span class="-ptxs">Unizik Awka | AWKA TOWN - Anambra </span>
+                                                <span class="-ptxs">+234 8083292538</span>
+                                                <span class="bdg _dfl _xs -mts -me-base">Default address</span>
+                                            </span>
+                                        </label>
+                                        <a href="/checkout/addresses/edit/11816460/" class="btn btn-default btn-sm -i-start -mla -me-base">Edit
+                                            <svg viewBox="0 0 24 24" class="ic -f-or5 -mlxs" width="14" height="14">
+                                                <use xlink:href="https://www.jumia.com.ng/assets_he/images/i-icons.5fc0e713.svg#edit"></use>
+                                            </svg>
+                                        </a>
+                                    </div>
+
+                                </fieldset>
+                                <a class="btn btn-default btn-sm -mhs" href="/checkout/addresses/create/">
+                                    <svg viewBox="0 0 24 24" class="ic -f-or5" width="24" height="24">
+                                        <use xlink:href="https://www.jumia.com.ng/assets_he/images/i-icons.5fc0e713.svg#add"></use>
+                                    </svg>Add address
+                                </a>
+                            </div>
+                            <div class="card-footer d-flex justify-content-end align-items-center">
+                                <a class="btn btn-default -mrm -pas" href="/checkout/summary/">Cancel</a>
+                                <button class="btn btn-primary">Select address</button>
+                            </div>
+                            <input name="csrfToken" value="20aa140929c3538a63c3d7b66673ce23" type="hidden">
+                        </form>
+                    </div>

@@ -1,0 +1,161 @@
+/* Cart CSS */
+@media (min-width: 1025px) {
+    .h-custom {
+        height: 100vh !important;
+    }
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+    top: 13px;
+}
+
+.bg-grey {
+    background-color: #eae8e8;
+}
+
+@media (min-width: 992px) {
+    .card-registration-2 .bg-grey {
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+}
+
+@media (max-width: 991px) {
+    .card-registration-2 .bg-grey {
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+}
+
+.progressbar-track {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.progressbar-track .progressbar {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 0rem;
+}
+
+.progressbar-track .progressbar li {
+    font-size: 1.5rem;
+    border: 1px solid #333;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background-color: #dddddd;
+    z-index: 100;
+    position: relative;
+}
+
+.progressbar-track .progressbar li.green {
+    border: 1px solid #007965;
+    background-color: #d5e6e2;
+}
+
+.progressbar-track .progressbar li.blue {
+    border: 1px solid #007965;
+    background-color: #0078AA;
+}
+
+.progressbar-track .progressbar li::after {
+    position: absolute;
+    font-size: 0.9rem;
+    top: 50px;
+    left: 0px;
+}
+
+#tracker {
+    position: absolute;
+    border-top: 1px solid #bbb;
+    width: 100%;
+    top: 25px;
+}
+
+#step-1::after {
+    content: 'Placed';
+}
+
+#step-2::after {
+    content: 'Accepted';
+    left: -10px;
+}
+
+#step-3::after {
+    content: 'Packed';
+}
+
+#step-4::after {
+    content: 'Shipped';
+}
+
+#step-5::after {
+    content: 'Delivered';
+    left: -10px;
+}
+
+
+
+/* Admin Order Styles */
+.main {
+
+    border-collapse: separate !important;
+    border-spacing: 0 11px !important;
+}
+
+tr {
+
+    border: 1px solid #eee;
+}
+
+.head th {
+
+    font-weight: 500;
+}
+
+
+tr:nth-child(3) {
+    border: solid thin;
+}
+
+.form-check-input:focus {
+    border-color: #8bbafe;
+    outline: 0;
+    box-shadow: none;
+}
+
+.btn {
+
+    height: 27px;
+    line-height: 11px;
+    color: #fff;
+}
+
+.form-check-input {
+    width: 1.15em;
+    height: 1.15em;
+    margin-top: 3px;
+
+}
+
+
+
+.btn:focus {
+    color: #fff;
+
+    box-shadow: none !important;
+}
+
+.order-color {
+    color: rgb(177, 18, 18);
+}
