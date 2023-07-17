@@ -211,6 +211,8 @@
     }
 
     elseif(isset($_POST['checkout'])){
+        print_r($_POST);
+        exit();
         $oid = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         $oid = str_shuffle($oid);
         $oid = substr($oid, 3, 13);
@@ -233,13 +235,13 @@
                     $uql = "UPDATE tbl_cart SET order_status = '1' WHERE _id = '$cid'";
                     $uquery = mysqli_query($connectDB,$uql);
                     if ($uquery) {
-                        $sql = "INSERT INTO tbl_orders(user,order_id,cart_id,user_address,order_status) VALUES(?,?,?,?,?)";
+                        $sql = "INSERT INTO tbl_orders(user_id,order_id,user_address_id,order_status) VALUES(?,?,?,?)";
                         // Initialize Database Connection
                         $stmt = mysqli_stmt_init($connectDB);
                         // Prepare SQL statement
                         mysqli_stmt_prepare($stmt,$sql);
                         // Bind parameters to the placeholder
-                        mysqli_stmt_bind_param($stmt,"sssss",$id,$oid,$cid,$address,$status);
+                        mysqli_stmt_bind_param($stmt,"ssss",$id,$oid,$address,$status);
                         // Execute statement
                         if (mysqli_stmt_execute($stmt)) {
                             $_SESSION['successmessage'] =  "Your order has been placed, you can track your order using the eye icon on the 'orders' page.Thank you for choosing C.I.Pinnacle.";

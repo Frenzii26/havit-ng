@@ -4,11 +4,6 @@ use Geevic\Shipping;
 
 session_start();
 
-require __DIR__ . './../../vendor/autoload.php'; // Load composer autoload
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
-$dotenv->load();
-
-define('DOMAIN', $_ENV['APP_URL']);
 
 function errorMessage()
 {

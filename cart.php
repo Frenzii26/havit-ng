@@ -38,32 +38,38 @@ cartAuth();
 </head>
 <style>
   @media (max-width:799px) {
-    .pricing-input-class{
+    .pricing-input-class {
       width: 50px;
     }
-    .fa-times{
+
+    .fa-times {
       padding-bottom: 70px;
     }
   }
-  .search{
-           width: 100px;
-           padding-left: 20px;
-           padding-top: 30px;
-       }
-      .btn-outline-primary{
-           background-color: #1d1d1d;
-           color: aliceblue;
-           border-radius: 0px;
-           height: 38px ;
-       }
-      .btn-outline-primary:hover{
-          background-color: #575555;
-      }
-     .fa-search{
-          color: aliceblue;
-         
-       }
+
+  .search {
+    width: 100px;
+    padding-left: 20px;
+    padding-top: 30px;
+  }
+
+  .btn-outline-primary {
+    background-color: #1d1d1d;
+    color: aliceblue;
+    border-radius: 0px;
+    height: 38px;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #575555;
+  }
+
+  .fa-search {
+    color: aliceblue;
+
+  }
 </style>
+
 <body class="body">
   <!--Navigation-->
   <?php require "assets/includes/headers.php";
@@ -72,11 +78,11 @@ cartAuth();
 
   <!--SEARCH-->
   <form action="shop" method="get" class="d-flex search">
-              <input type="text" name="q" class="form-control rounded-0" placeholder="Search">
-              <button class="btn btn-outline-primary border-0">
-                <i class="fa fa-search"></i>
-              </button>
-            </form>
+    <input type="text" name="q" class="form-control rounded-0" placeholder="Search">
+    <button class="btn btn-outline-primary border-0">
+      <i class="fa fa-search"></i>
+    </button>
+  </form>
   <!--Cart home-->
   <section id="cart-home" class="container my-5">
     <h2 class="font-weight-bold pt-5">Shopping Cart</h2>
@@ -115,16 +121,16 @@ cartAuth();
                           <h6 style="color:rgb(22, 22, 22);" class="text-black mb-0"><?php echo substr(ucwords(getName($connectDB, "product_name", "tbl_products", "product_id", $row['product_id'])), 0, 30) . '...'; ?></h6>
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                        <button class="btn btn-transparent px-2 h-100 position-relative" style="z-index: 9;" onclick="addQty('#qty<?php echo $row['_id']; ?>','<?php echo $row['_id']; ?>','#subTotal<?php echo $row['_id']; ?>')">
+                          <button class="btn btn-transparent px-2 h-100 position-relative" style="z-index: 9;" onclick="addQty('#qty<?php echo $row['_id']; ?>','<?php echo $row['_id']; ?>','#subTotal<?php echo $row['_id']; ?>')">
                             <i class="fas fa-plus"></i>
                           </button>
                           <button class="btn btn-transparent px-2 h-100" onclick="subQty('#qty<?php echo $row['_id']; ?>','<?php echo $row['_id']; ?>','#subTotal<?php echo $row['_id']; ?>')">
                             <i class="fas fa-minus"></i>
                           </button>
 
-                          <input  min="0" id="qty<?php echo $row['_id']; ?>" name="quantity" value="<?php echo $row['quantity'] ?>" type="text" class="form-control form-control-sm h-100 pricing-input-class" readonly /> 
+                          <input min="0" id="qty<?php echo $row['_id']; ?>" name="quantity" value="<?php echo $row['quantity'] ?>" type="text" class="form-control form-control-sm h-100 pricing-input-class" readonly />
 
-                         
+
                         </div>
                         <div class="col-md-3 col-lg-2 col-xl-2 position-relativ" id="subTotal<?php echo $row['_id']; ?>">
                           <h6 style="color:rgb(22, 22, 22);" class="mb-0">₦ <?php echo number_format($row['total'], 2, '.', ','); ?> </h6>
@@ -154,13 +160,13 @@ cartAuth();
                     <div class="d-flex justify-content-between mb-4">
                       <h5 style="color:rgb(22, 22, 22);" class="text-uppercase">items <span>
                           <?php
-                            if (mysqli_num_rows($query) < 1) {
-                              echo "0";
-                            }else{
-                              $nsql = "SELECT * FROM tbl_cart WHERE user = '" . $_SESSION['id'] . "' AND order_status = '0'";
-                              $nquery = mysqli_query($connectDB, $nsql);
-                              echo mysqli_num_rows($nquery);
-                            }
+                          if (mysqli_num_rows($query) < 1) {
+                            echo "0";
+                          } else {
+                            $nsql = "SELECT * FROM tbl_cart WHERE user = '" . $_SESSION['id'] . "' AND order_status = '0'";
+                            $nquery = mysqli_query($connectDB, $nsql);
+                            echo mysqli_num_rows($nquery);
+                          }
                           ?>
                         </span></h5>
                     </div>
@@ -180,51 +186,51 @@ cartAuth();
                     <div class="d-flex justify-content-between mb-5">
                       <h5 style="color:rgb(22, 22, 22);" class="text-uppercase">Total price</h5>
                       <?php
-                       if (mysqli_num_rows($query) < 1) {
+                      if (mysqli_num_rows($query) < 1) {
                         echo "<h5>₦ 0</h5>";
-                      }else{
-                      $nsql = "SELECT SUM(total) AS grand_total FROM tbl_cart WHERE user = '" . $_SESSION['id'] . "' AND order_status = '0'";
-                      $nquery = mysqli_query($connectDB, $nsql);
-                      $nrow = mysqli_fetch_assoc($nquery);
+                      } else {
+                        $nsql = "SELECT SUM(total) AS grand_total FROM tbl_cart WHERE user = '" . $_SESSION['id'] . "' AND order_status = '0'";
+                        $nquery = mysqli_query($connectDB, $nsql);
+                        $nrow = mysqli_fetch_assoc($nquery);
                       ?>
-                      <h5 style="color:rgb(22, 22, 22);" id="grandTotal">₦ <?php echo number_format($nrow['grand_total'], 2, '.', ','); ?></h5>
-                
+                        <h5 style="color:rgb(22, 22, 22);" id="grandTotal">₦ <?php echo number_format($nrow['grand_total'], 2, '.', ','); ?></h5>
+
                     </div>
-                    <button type="button" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Check Out</button>
-                    <?php } ?>
+                    <button type="button" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Check Out</button>
+                  <?php } ?>
 
-                        <!--Address Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Select Address</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                  <select name="address" class="form-select">
-                                    <?php
-                                        $sql = "SELECT * FROM user_address WHERE userid = '".$_SESSION['id']."'";
-                                        $query = mysqli_query($connectDB,$sql);
-                                        if (mysqli_num_rows($query) < 1) {
-                                            echo "<option disabled selected>No Address Found, Please Add Address </option>";
-                                        }
-                                        while($row = mysqli_fetch_assoc($query)){
-                                    ?>
-                                      <option><?php echo substr(ucwords($row['user_address']),0,50)."..."; ?></option>
-                                    <?php } ?>
-                                  </select>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success" data-bs-dismiss="modal"><a style="color: white;" href="profile">Add Address</a></button>
-                                <button type="submit" name="checkout" class="btn btn-primary text-white">Place Order</button>
-                              </div>
-                            </div>
-                          </div>
+                  <!--Address Modal -->
+                  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="staticBackdropLabel">Select Address</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <div class="modal-body">
+                          <select name="address" class="form-select">
+                            <?php
+                            $sql = "SELECT * FROM user_address WHERE userid = '" . $_SESSION['id'] . "'";
+                            $query = mysqli_query($connectDB, $sql);
+                            if (mysqli_num_rows($query) < 1) {
+                              echo "<option disabled selected>No Address Found, Please Add Address </option>";
+                            }
+                            while ($row = mysqli_fetch_assoc($query)) {
+                            ?>
+                              <option><?php echo substr(ucwords($row['user_address']), 0, 50) . "..."; ?></option>
+                            <?php } ?>
+                          </select>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-success" data-bs-dismiss="modal"><a style="color: white;" href="profile">Add Address</a></button>
+                          <button type="submit" name="checkout" class="btn btn-primary text-white">Place Order</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-                    </form>
+                  </form>
                   </div>
                 </div>
               </div>
@@ -255,23 +261,23 @@ cartAuth();
       curr = Number(curr) + 1;
 
       qty.value = curr;
-      if(curr > 0){
+      if (curr > 0) {
 
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          //  console.log(this.response);
-          let obj = JSON.parse(this.response);
-          // console.log(obj);
-          subQty.innerText = `₦ ${formatter.format(obj.subTotal)}`;
-          totalVal.innerText = `₦ ${formatter.format(obj.grandTotal)}`;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            //  console.log(this.response);
+            let obj = JSON.parse(this.response);
+            // console.log(obj);
+            subQty.innerText = `₦ ${formatter.format(obj.subTotal)}`;
+            totalVal.innerText = `₦ ${formatter.format(obj.grandTotal)}`;
 
-        }
-      };
-      xmlhttp.open("GET", "assets/config/order_process.php?addQty=" + id + "&qty=" + curr + "&u=<?php echo $_SESSION['id']; ?>", true);
-      xmlhttp.send();
+          }
+        };
+        xmlhttp.open("GET", "assets/config/order_process.php?addQty=" + id + "&qty=" + curr + "&u=<?php echo $_SESSION['id']; ?>", true);
+        xmlhttp.send();
 
-    }
+      }
     }
 
     function subQty(input, id, sub) {
@@ -284,24 +290,24 @@ cartAuth();
 
       if (curr < 1) {
         curr = 1;
-      }else{
-      qty.value = curr
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          // console.log(this.response);
-          let obj = JSON.parse(this.response);
-          // console.log(obj);
-          subQty.innerText = `₦ ${formatter.format(obj.subTotal)}`;
-          total.innerText = `₦ ${formatter.format(obj.grandTotal)}`;
-        }
-      };
-      xmlhttp.open("GET", "assets/config/order_process.php?subQty=" + id + "&qty=" + curr + "&u=<?php echo $_SESSION['id']; ?>", true);
-      xmlhttp.send();
-    }
+      } else {
+        qty.value = curr
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            // console.log(this.response);
+            let obj = JSON.parse(this.response);
+            // console.log(obj);
+            subQty.innerText = `₦ ${formatter.format(obj.subTotal)}`;
+            total.innerText = `₦ ${formatter.format(obj.grandTotal)}`;
+          }
+        };
+        xmlhttp.open("GET", "assets/config/order_process.php?subQty=" + id + "&qty=" + curr + "&u=<?php echo $_SESSION['id']; ?>", true);
+        xmlhttp.send();
+      }
     }
 
-    
+
 
     // console.log(formatter.format(10000));
   </script>
