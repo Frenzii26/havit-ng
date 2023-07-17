@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2023 at 02:03 PM
+-- Generation Time: Jul 17, 2023 at 04:32 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `geevic`
+-- Database: `havit`
 --
 
 -- --------------------------------------------------------
@@ -41,7 +41,7 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`_id`, `cat_id`, `category_name`, `category_image`, `date_created`) VALUES
 (11, 'SdG37rMm2oI9T', 'baked foods', 'SdG37rMm2oI9T.jpg', '2023-04-19 05:51:56'),
-(12, 'ZbkqOaewG2V76', 'spices', 'ZbkqOaewG2V76.jpg', '2023-04-19 05:53:30');
+(12, 'ZbkqOaewG2V76', 'Spices', 'ZbkqOaewG2V76.jpg', '2023-04-19 05:53:30');
 
 -- --------------------------------------------------------
 
@@ -325,7 +325,8 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
-(16, '9669275999', 'aEdl2hxWvHZwp', 5, '1500.00', '2023-06-02 11:55:09', '2023-06-02 11:55:09');
+(39, '3T4AlwziqNs5M', 'aEdl2hxWvHZwp', 4, '1200.00', '2023-07-17 13:53:25', '2023-07-17 13:53:25'),
+(40, '3T4AlwziqNs5M', 'upvcEsUBJqXLw', 3, '1500.00', '2023-07-17 13:53:25', '2023-07-17 13:53:25');
 
 -- --------------------------------------------------------
 
@@ -901,6 +902,13 @@ CREATE TABLE `sub_categories` (
   `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `sub_categories`
+--
+
+INSERT INTO `sub_categories` (`_id`, `sub_id`, `cat_id`, `sub_name`, `date_created`) VALUES
+(19, 'jOqmsteIAunhp', 'ZbkqOaewG2V76', 'Pepper', '2023-07-17 11:57:33');
+
 -- --------------------------------------------------------
 
 --
@@ -930,6 +938,14 @@ CREATE TABLE `tbl_cart` (
   `date_created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_cart`
+--
+
+INSERT INTO `tbl_cart` (`_id`, `user`, `product_id`, `quantity`, `total`, `order_status`, `date_created`) VALUES
+(86, '12', 'aEdl2hxWvHZwp', '4', '1200', '1', '2023-07-17 13:53:25'),
+(87, '12', 'upvcEsUBJqXLw', '3', '1500', '1', '2023-07-17 13:53:25');
+
 -- --------------------------------------------------------
 
 --
@@ -952,7 +968,7 @@ CREATE TABLE `tbl_orders` (
 --
 
 INSERT INTO `tbl_orders` (`_id`, `user_id`, `order_id`, `total_amount`, `user_address_id`, `order_status`, `date_updated`, `date_created`) VALUES
-(61, 9, '9669275999', 1596, 11, 'pending', '2023-06-02 12:55:09', '2023-06-02 11:55:09');
+(84, 12, '3T4AlwziqNs5M', 2700, 21, 'processing', '2023-07-17 14:53:25', '2023-07-17 13:53:25');
 
 -- --------------------------------------------------------
 
@@ -978,9 +994,9 @@ CREATE TABLE `tbl_products` (
 --
 
 INSERT INTO `tbl_products` (`_id`, `product_id`, `product_name`, `cat_id`, `sub_id`, `price`, `stock`, `details`, `date_created`, `weight`) VALUES
-(22, 'upvcEsUBJqXLw', 'adminstrative', 'sdg37rmm2oi9t', '1', '500', '66', 'dfghhj', '2023-05-03 19:10:35', 20),
-(23, 'SQL68pdxqVYjT', 'dylan salazar', 'zbkqoaewg2v76', '', '64', '35', 'Non ullamco et moles', '2023-05-03 19:10:40', 20),
-(24, 'aEdl2hxWvHZwp', 'johncode', 'sdg37rmm2oi9t', '1', '300', '11', 'vh vihi huih iuknuk', '2023-05-07 19:07:27', 20);
+(22, 'upvcEsUBJqXLw', 'adminstrative', 'sdg37rmm2oi9t', 'jOqmsteIAunhp', '500', '66', 'dfghhj', '2023-07-17 10:59:17', 20),
+(23, 'SQL68pdxqVYjT', 'dylan salazar', 'zbkqoaewg2v76', 'jOqmsteIAunhp', '64', '35', 'Non ullamco et moles', '2023-07-17 10:59:23', 20),
+(24, 'aEdl2hxWvHZwp', 'johncode', 'sdg37rmm2oi9t', 'jOqmsteIAunhp', '300', '11', 'vh vihi huih iuknuk', '2023-07-17 10:59:29', 20);
 
 -- --------------------------------------------------------
 
@@ -1005,8 +1021,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`_id`, `full_name`, `email`, `phone`, `user_password`, `user_role`, `date_created`) VALUES
 (5, 'clinton', 'clintonmaduakor7@gmail.com', '08100936162', '$2y$10$SkLCYGz1mJY5Se/3Miu/seVNU9/ue3vlv142zJramMNxa8nfBRvrm', 'user', '2022-07-21 01:26:10'),
 (8, 'GEEVIC ADMIN', 'geevichfoods@gmail.com', '08139998229', '$2y$10$YJ2hkm9QVKbG2iq8Cn2pvOWvQPZiCEPq19czMTbe4dhVLiherbcd.', 'admin', '2023-04-19 05:44:14'),
-(9, 'Ifeanyichukwu John', 'ifeanyichukwujohn70@gmail.com', '8083292538', '$2y$10$cXddHwfdqfD/6jOs1z0iV.Sse1oAiJbaT9pLhP.wS4BwaEP3dxqxW', 'admin', '2023-04-20 04:45:56'),
-(11, 'Mr John', 'john@gmail.com', '567766556775', '$2y$10$U.gkf.rhLWbZ6qlmjVgLueVHxdKHR/J.EIQ6iH9l7Gds6XV0Jd92y', 'user', '2023-05-22 11:22:41');
+(11, 'Mr John', 'john@gmail.com', '567766556775', '$2y$10$U.gkf.rhLWbZ6qlmjVgLueVHxdKHR/J.EIQ6iH9l7Gds6XV0Jd92y', 'user', '2023-05-22 11:22:41'),
+(12, 'Ifeanyichukwu John', 'ifeanyichukwujohn70@gmail.com', '8083292538', '$2y$10$ebrKOCR8gnqghygfr3AGNur/r9EWPWYlFcH/m2Henyj0IzPkEcWwu', 'user', '2023-07-17 11:30:11');
 
 -- --------------------------------------------------------
 
@@ -1032,7 +1048,8 @@ CREATE TABLE `user_address` (
 INSERT INTO `user_address` (`_id`, `userid`, `user_address`, `country`, `state`, `city`, `zip_code`, `date_created`) VALUES
 (11, '9', 'New York', 'USA', 'New York', 'city a', 12345, '2023-04-20 05:17:21'),
 (19, '9', 'Abakaliki', 'Nigeria', 'Ebonyi', 'Ezzamgbo', 480, '2023-06-01 11:32:55'),
-(20, '9', 'no 2 africa lane', 'Antarctica', 'Moron', 'Babelic', 56753, '2023-06-01 04:22:09');
+(20, '9', 'no 2 africa lane', 'Antarctica', 'Moron', 'Babelic', 56753, '2023-06-01 04:22:09'),
+(21, '12', 'Abakaliki', 'Algeria', 'Ebonyi', 'Ezzamgbo', 480, '2023-07-17 12:00:58');
 
 --
 -- Indexes for dumped tables
@@ -1136,7 +1153,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `product_image`
@@ -1160,7 +1177,7 @@ ALTER TABLE `shipping_rate`
 -- AUTO_INCREMENT for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
-  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_ads`
@@ -1172,13 +1189,13 @@ ALTER TABLE `tbl_ads`
 -- AUTO_INCREMENT for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `tbl_orders`
 --
 ALTER TABLE `tbl_orders`
-  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `tbl_products`
@@ -1190,13 +1207,13 @@ ALTER TABLE `tbl_products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_address`
 --
 ALTER TABLE `user_address`
-  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
