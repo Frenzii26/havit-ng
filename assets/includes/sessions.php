@@ -4,7 +4,6 @@ use Geevic\Shipping;
 
 session_start();
 
-
 function errorMessage()
 {
     if (isset($_SESSION['errormessage'])) {

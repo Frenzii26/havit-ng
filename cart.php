@@ -217,7 +217,7 @@ cartAuth();
                             }
                             while ($row = mysqli_fetch_assoc($query)) {
                             ?>
-                              <option><?php echo substr(ucwords($row['user_address']), 0, 50) . "..."; ?></option>
+                              <option value="<?php echo $row['_id'] ?>"><?php echo substr(ucwords($row['user_address']), 0, 50) . "..."; ?></option>
                             <?php } ?>
                           </select>
                         </div>

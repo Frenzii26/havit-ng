@@ -111,7 +111,9 @@ function progressIcon($row, $check)
         while ($row = mysqli_fetch_assoc($query)) {
           $cql = "SELECT * FROM order_items WHERE order_id = '" . $row['order_id'] . "'";
           $cquery = mysqli_query($connectDB, $cql);
-          $crow = mysqli_fetch_assoc($cquery);
+          $crow = mysqli_fetch_assoc($cquery); //put the while loop here if the need arises
+
+         
         ?>
           <div class="col-lg-10 col-xl-8 mb-2">
             <div class="card" style="border-radius: 10px;">
@@ -191,7 +193,7 @@ function progressIcon($row, $check)
                                 </div>
                                 <div class="d-flex justify-content-between">
                                   <p class="fw-bold">Total</p>
-                                  <p class="fw-bold" style="color: #35558a;">₦ <?php echo number_format($crow['price'] + $row['deliveryfee'], 2, '.', ','); ?></p>
+                                  <p class="fw-bold" style="color: #35558a;">₦ <?php echo number_format($crow['price'], 2, '.', ','); ?></p>
                                 </div>
                                 <div class="my-3">
                                   <!-- Timeline Starts -->
